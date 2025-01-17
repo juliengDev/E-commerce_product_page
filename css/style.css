@@ -16,15 +16,33 @@ ORDER: Base + typography > general layout + grid > page layout > components
 
 1em = 16px
 */
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap");
 :root {
-  --color-dark-charcoal: #312e2c;
-  --color-dark-raspberry: #7a284e;
-  --color-brandy-red: #854632;
-  --color-wenge-brown: #5f564d;
-  --color-eggshell: #f3e5d7;
-  --color-white-coffee: #e3ddd7;
-  --color-snow: #fff7fb;
-  --color-pure-white: #ffffff;
+  --base: 1rem;
+  /* SPACING SIZES 1.26, 1.875, 2.25, 2.5. 2.8125*/
+  --sizer-1: calc((var(--base) * 1.26));
+  --sizer-2: calc((var(--base) * 1.875));
+  --sizer-3: calc((var(--base) * 2.25));
+  --sizer-4: calc((var(--base) * 2.5));
+  --sizer-5: calc((var(--base) * 2.8125));
+  /* FONT SIZES */
+  --fs-1: calc((var(--base) * 0.8));
+  --fs-2: ((--base));
+  --fs-3: calc((var(--base) * 1.75));
+  --fs-4: calc((var(--base) * 2.25));
+  /* COLORS */
+  --bkg: hsl(25, 100%, 99%);
+  --accent: hsl(26, 100%, 55%);
+  --accent-semi-transparent: hsl(26, 100%, 55%, 0.4);
+  --accent-pale: hsl(25, 100%, 94%);
+  --text: hsl(25, 100%, 3%);
+  --text-opacity: hsl(25, 100%, 3%, 0.75);
+  --alt-bkg: hsl(220, 13%, 13%);
+  --alt-bkg1: hsl(219, 9%, 45%);
+  --alt-bkg2: hsl(220, 14%, 75%);
+  --alt-bkg3: hsl(223, 64%, 98%);
+  /* MISC */
+  --radius: 0.8rem;
 }
 
 * {
@@ -77,10 +95,11 @@ FONT SIZE SYSTEM (px)
 
   */
 body {
-  font-family: "Verdana", sans-serif;
-  background-color: #fafafa;
+  font-family: "Kumbh Sans", serif;
+  font-optical-sizing: auto;
   font-weight: 400;
-  line-height: 1.4;
+  font-size: 1.6rem;
+  font-variation-settings: "YOPQ" 300;
 }
 
 .centered-div {
@@ -121,15 +140,274 @@ body {
   border: 0;
 }
 
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
+
+.error-message {
+  color: #d8000c;
+  background-color: #ffbaba;
+  padding: 10px;
+  margin-top: 2.4rem;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+svg {
+  pointer-events: none;
+}
+
+.fs-1 {
+  font-size: var(--fs-1);
+}
+
+.fs-2 {
+  font-size: var(--fs-2);
+}
+
+.fs-3 {
+  font-size: var(--fs-3);
+}
+
+.fs-4 {
+  font-size: var(--fs-4);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+h1, .h1 {
+  line-height: 1.1;
+}
+
+h2, .h2 {
+  line-height: 1.1;
+}
+
+.sizer-1 {
+  font-size: var(--sizer-1);
+}
+
+.sizer-2 {
+  font-size: var(--sizer-2);
+}
+
+.sizer-3 {
+  font-size: var(--sizer-3);
+}
+
+.sizer-4 {
+  font-size: var(--sizer-4);
+}
+
+.sizer-5 {
+  font-size: var(--sizer-5);
+}
+
+.gap-base {
+  gap: var(--base);
+}
+
+.gap-1 {
+  gap: var(--sizer-1);
+}
+
+.gap-2 {
+  gap: var(--sizer-2);
+}
+
+.gap-3 {
+  gap: var(--sizer-3);
+}
+
+.gap-4 {
+  gap: var(--sizer-4);
+}
+
+.gap-5 {
+  gap: var(--sizer-5);
+}
+
+.bg-bkg {
+  background-color: var(--bkg);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.bg-accent-pale {
+  background-color: var(--accent-pale);
+}
+
+.bg-text {
+  background-color: var(--text);
+}
+
+.bg-text-opacity {
+  background-color: var(--text-opacity);
+}
+
+.bg-alt-bkg {
+  background-color: var(--alt-bkg);
+}
+
+.bg-alt-bkg1 {
+  background-color: var(--alt-bkg1);
+}
+
+.bg-alt-bkg2 {
+  background-color: var(--alt-bkg2);
+}
+
+.bg-alt-bkg3 {
+  background-color: var(--alt-bkg3);
+}
+
+.bkg {
+  color: var(--bkg);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.accent-pale {
+  color: var(--accent-pale);
+}
+
+.text {
+  color: var(--text);
+}
+
+.text-opacity {
+  color: var(--text-opacity);
+}
+
+.alt-bkg {
+  color: var(--alt-bkg);
+}
+
+.alt-bkg1 {
+  color: var(--alt-bkg1);
+}
+
+.alt-bkg2 {
+  color: var(--alt-bkg2);
+}
+
+.alt-bkg3 {
+  color: var(--alt-bkg3);
+}
+
+.grid {
+  display: grid;
+}
+
+.flex {
+  display: flex;
+}
+
+.align-item {
+  align-items: center;
+}
+
+.rounded {
+  border-radius: var(--radius);
+}
+
 .attribution {
   margin: 1.6rem 0 6rem;
   font-size: 1.1rem;
   text-align: center;
-  color: var(--color-wenge-brown);
+  color: var(--color-dark-charcoal);
 }
 .attribution__credit {
   font-weight: 800;
   color: var(--color-dark-raspberry) !important;
+}
+.attribution a {
+  cursor: pointer;
+}
+
+.product {
+  padding: var(--sizer-1);
+}
+
+.product__price {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price--discount {
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.price--original {
+  text-decoration: line-through;
+}
+
+/* CHECKOUT SECTION */
+.checkout {
+  flex-wrap: wrap;
+}
+
+.checkout__amt {
+  flex: 100%;
+}
+
+.checkout__btn {
+  flex: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: calc(var(--sizer-1) * 0.5) var(--sizer-1);
+  box-shadow: 0px 10px 25px var(--accent-semi-transparent);
+}
+
+.checkout__amtBtn {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--sizer-1) * 0.2) var(--sizer-1);
+}
+
+.amt {
+  padding: calc(var(--sizer-1) * 0.5);
+  height: var(--sizer-3);
+  width: var(--sizer-3);
+  place-items: center;
+}
+
+.amt[disabled] {
+  cursor: not-allowed;
 }
 
 /*# sourceMappingURL=style.css.map */

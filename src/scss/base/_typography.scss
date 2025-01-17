@@ -11,12 +11,15 @@
 	•	900 : Black (Heavy)
   
   */
+	@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
+
 
 body {
-  font-family: "Verdana", sans-serif;
-  background-color: var(--color-snow);
-  color: var(--color-dark-charcoal);
+  font-family: "Kumbh Sans", serif;
+  font-optical-sizing: auto;
   font-weight: 400;
-  line-height: 1.4;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  font-variation-settings:
+    "YOPQ" 300;
 }
+
