@@ -1,52 +1,104 @@
+main {
+  max-width: 111rem;
+
+}
+
+// slider section
+
+.slider {
+  max-width: 44.5rem;
+
+  &__container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    &__btn {
+      position: absolute;
+      z-index:5;
+      top: 50%;
+      background-color: var(--bkg);
+      height: var(--sizer-7);
+      width: var(--sizer-7);
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      display: grid
+  ;
+      place-items: center;
+      transform: translateY(-50%);
+      cursor: pointer;
+
+      &--left{
+        left: var(--sizer-2);
+      }
+      &--right{
+        right: var(--sizer-2);
+      }
+    }
+    & .slider {
+      width: 100%;
+      height: 100%;
+      & .slide {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+    }
+  }
+}
+
 //product section 
 .product {
-  padding: var(--sizer-1);
-}
-.product__price  {
-  justify-content: space-between;
-  align-items: center;
-}
-.price--discount {
-  padding: 2px 5px;
-  border-radius: 5px;
-}
-
-.price--original {
-  text-decoration: line-through;
-}
-
-/* CHECKOUT SECTION */
-
-.checkout {
-  flex-wrap: wrap;
-}
-
-.checkout__amt {
-  flex: 100%;
-}
-
-.checkout__btn {
-  flex: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: calc(var(--sizer-1) * 0.5) var(--sizer-1);
-  box-shadow: 0px 10px 25px var(--accent-semi-transparent);
-}
-
-.checkout__amtBtn {
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding: calc(var(--sizer-1) * 0.2) var(--sizer-1);
+  padding: var(--sizer-4);
+  margin-bottom: 8.8rem;
+  &__price  {
+    justify-content: space-between;
+    align-items: center;    
+    &__discount {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+    }
+    &__original { 
+      text-decoration: line-through;
+    }
+  }
+  &__checkout {
+    flex-wrap: wrap;
+    &__amt {
+      flex: 100%;
+    }
+    &__amtBtn {
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.2rem 2.4rem;
+      border-radius: 10px;
+    }
+    &__btn {
+      display: flex;
+      flex: 100%;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      padding: 1.9rem;
+      box-shadow: 0px 10px 25px var(--accent-semi-transparent);
+    }
+  }
 }
 
 .amt {
-  padding: calc(var(--sizer-1) * 0.5);
-  height: var(--sizer-3);
-  width: var(--sizer-3);
-  place-items: center;
+  height: var(--sizer-1);
+  width: var(--sizer-1);
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .amt[disabled] {
   cursor: not-allowed;
 }
+
+

@@ -17,34 +17,6 @@ ORDER: Base + typography > general layout + grid > page layout > components
 1em = 16px
 */
 @import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap");
-:root {
-  --base: 1rem;
-  /* SPACING SIZES 1.26, 1.875, 2.25, 2.5. 2.8125*/
-  --sizer-1: calc((var(--base) * 1.26));
-  --sizer-2: calc((var(--base) * 1.875));
-  --sizer-3: calc((var(--base) * 2.25));
-  --sizer-4: calc((var(--base) * 2.5));
-  --sizer-5: calc((var(--base) * 2.8125));
-  /* FONT SIZES */
-  --fs-1: calc((var(--base) * 0.8));
-  --fs-2: ((--base));
-  --fs-3: calc((var(--base) * 1.75));
-  --fs-4: calc((var(--base) * 2.25));
-  /* COLORS */
-  --bkg: hsl(25, 100%, 99%);
-  --accent: hsl(26, 100%, 55%);
-  --accent-semi-transparent: hsl(26, 100%, 55%, 0.4);
-  --accent-pale: hsl(25, 100%, 94%);
-  --text: hsl(25, 100%, 3%);
-  --text-opacity: hsl(25, 100%, 3%, 0.75);
-  --alt-bkg: hsl(220, 13%, 13%);
-  --alt-bkg1: hsl(219, 9%, 45%);
-  --alt-bkg2: hsl(220, 14%, 75%);
-  --alt-bkg3: hsl(223, 64%, 98%);
-  /* MISC */
-  --radius: 0.8rem;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -57,7 +29,13 @@ ORDER: Base + typography > general layout + grid > page layout > components
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   min-height: 100dvh;
+  height: 100%;
+  width: 100%;
 }
 
 html {
@@ -72,6 +50,10 @@ a:active {
   text-decoration: none;
   color: inherit;
   cursor: auto; /* or pointer if you want to keep the default hand cursor */
+}
+
+svg {
+  pointer-events: none;
 }
 
 /*
@@ -98,85 +80,46 @@ body {
   font-family: "Kumbh Sans", serif;
   font-optical-sizing: auto;
   font-weight: 400;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-variation-settings: "YOPQ" 300;
 }
 
-.centered-div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.centered-div2 {
-  margin: 0 auto;
-  max-width: 50%;
-  text-align: center;
-}
-
-.centered-div3 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
-button {
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  line-height: normal;
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
-  -webkit-appearance: none;
-}
-
-.error-message {
-  color: #d8000c;
-  background-color: #ffbaba;
-  padding: 10px;
-  margin-top: 2.4rem;
-  border-radius: 4px;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-svg {
-  pointer-events: none;
+:root {
+  --base: 1rem;
+  /* SPACING SIZES 1.26, 1.875, 2.25, 2.5. 2.8125*/
+  --sizer-1: calc((var(--base) * 1.26));
+  --sizer-2: calc((var(--base) * 1.6));
+  --sizer-3: calc((var(--base) * 2.25));
+  --sizer-4: calc((var(--base) * 2.4));
+  --sizer-5: calc((var(--base) * 2.8));
+  --sizer-6: calc((var(--base) * 3.6));
+  --sizer-7: calc((var(--base) * 4));
+  /* FONT SIZES */
+  --fs-1: calc((var(--base) * 0.8));
+  --fs-2: ((--base));
+  --fs-3: calc((var(--base) * 1.2));
+  --fs-4: calc((var(--base) * 2.25));
+  --fs-5: calc((var(--base) * 2.8));
+  /* LETTER SPACING */
+  --lsizer-1: calc((var(--base) * 0.185));
+  /* LINE HEIGHT */
+  --lh-sizer-1: calc((var(--base) * 0.8));
+  --lh-sizer-2: calc((var(--base) * 1.2));
+  --lh-sizer-3: calc((var(--base) * 2.5));
+  --lh-sizer-4: calc((var(--base) * 3.2));
+  /* COLORS */
+  --bkg: hsl(25, 100%, 99%);
+  --accent: hsl(26, 100%, 55%);
+  --accent-semi-transparent: hsl(26, 100%, 55%, 0.4);
+  --accent-pale: hsl(25, 100%, 94%);
+  --text: hsl(25, 100%, 3%);
+  --text-opacity: hsl(25, 100%, 3%, 0.75);
+  --alt-bkg: hsl(220, 13%, 13%);
+  --alt-bkg1: hsl(219, 9%, 45%);
+  --alt-bkg2: hsl(220, 14%, 75%);
+  --alt-bkg3: hsl(223, 64%, 98%);
+  /* MISC */
+  --radius: 0.6rem;
 }
 
 .fs-1 {
@@ -195,11 +138,15 @@ svg {
   font-size: var(--fs-4);
 }
 
+.fs-5 {
+  font-size: var(--fs-5);
+}
+
 .uppercase {
   text-transform: uppercase;
 }
 
-.font-bold {
+.ft-bold {
   font-weight: bold;
 }
 
@@ -211,24 +158,16 @@ h2, .h2 {
   line-height: 1.1;
 }
 
-.sizer-1 {
-  font-size: var(--sizer-1);
+.ls-sizer-1 {
+  letter-spacing: var(--lsizer-1);
 }
 
-.sizer-2 {
-  font-size: var(--sizer-2);
+.lh-3 {
+  line-height: var(--lh-sizer-3);
 }
 
-.sizer-3 {
-  font-size: var(--sizer-3);
-}
-
-.sizer-4 {
-  font-size: var(--sizer-4);
-}
-
-.sizer-5 {
-  font-size: var(--sizer-5);
+.lh-4 {
+  line-height: var(--lh-sizer-4);
 }
 
 .gap-base {
@@ -343,6 +282,79 @@ h2, .h2 {
   border-radius: var(--radius);
 }
 
+.centered-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered-div2 {
+  margin: 0 auto;
+  max-width: 50%;
+  text-align: center;
+}
+
+.centered-div3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
+
+.error-message {
+  color: #d8000c;
+  background-color: #ffbaba;
+  padding: 10px;
+  margin-top: 2.4rem;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .attribution {
   margin: 1.6rem 0 6rem;
   font-size: 1.1rem;
@@ -357,53 +369,95 @@ h2, .h2 {
   cursor: pointer;
 }
 
-.product {
-  padding: var(--sizer-1);
+main {
+  max-width: 111rem;
 }
 
+.slider {
+  max-width: 44.5rem;
+}
+.slider__container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.slider__container__btn {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  background-color: var(--bkg);
+  height: var(--sizer-7);
+  width: var(--sizer-7);
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.slider__container__btn--left {
+  left: var(--sizer-2);
+}
+.slider__container__btn--right {
+  right: var(--sizer-2);
+}
+.slider__container .slider {
+  width: 100%;
+  height: 100%;
+}
+.slider__container .slider .slide {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product {
+  padding: var(--sizer-4);
+  margin-bottom: 8.8rem;
+}
 .product__price {
   justify-content: space-between;
   align-items: center;
 }
-
-.price--discount {
-  padding: 2px 5px;
-  border-radius: 5px;
+.product__price__discount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
 }
-
-.price--original {
+.product__price__original {
   text-decoration: line-through;
 }
-
-/* CHECKOUT SECTION */
-.checkout {
+.product__checkout {
   flex-wrap: wrap;
 }
-
-.checkout__amt {
+.product__checkout__amt {
   flex: 100%;
 }
-
-.checkout__btn {
-  flex: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: calc(var(--sizer-1) * 0.5) var(--sizer-1);
-  box-shadow: 0px 10px 25px var(--accent-semi-transparent);
-}
-
-.checkout__amtBtn {
+.product__checkout__amtBtn {
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: calc(var(--sizer-1) * 0.2) var(--sizer-1);
+  padding: 2.2rem 2.4rem;
+  border-radius: 10px;
+}
+.product__checkout__btn {
+  display: flex;
+  flex: 100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 1.9rem;
+  box-shadow: 0px 10px 25px var(--accent-semi-transparent);
 }
 
 .amt {
-  padding: calc(var(--sizer-1) * 0.5);
-  height: var(--sizer-3);
-  width: var(--sizer-3);
-  place-items: center;
+  height: var(--sizer-1);
+  width: var(--sizer-1);
+}
+.amt:hover {
+  cursor: pointer;
 }
 
 .amt[disabled] {
