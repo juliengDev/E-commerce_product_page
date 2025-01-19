@@ -7,6 +7,9 @@ main {
 
 .slider {
   max-width: 44.5rem;
+  @include respond(phone){
+    gap:3.2rem
+  }
 
   &__container {
     overflow: hidden;
@@ -45,6 +48,14 @@ main {
         object-fit: cover;
       }
 
+    }
+  }
+  &__thumbnails {
+    display: none;
+    gap:3.1rem;
+    @include respond(phone) {
+      display: flex;
+      align-items: start;
     }
   }
 }

@@ -11,6 +11,25 @@
 </head>
 
 <body>
+  <header>
+    <div class="navigation-wrapper">
+      <label for="menu" class="hamburger-menu">
+        <span class="sr-only">Toggle menu</span>
+        <input type="checkbox" id="menu" aria-expanded="false" aria-controls="header-menu" aria-pressed="true" role="button" aria-haspopup="menu">  
+      </label>
+      <aside class="sidebar" id="mobile-nav" aria-hidden="true">
+        <nav class="sidebar__nav" aria-label="Mobile navigation">
+          <ul> 
+            <li><a href="#home" class="sidebar__link">Home</a></li>
+            <li><a href="#new" class="sidebar__link">New</a></li>
+            <li><a href="#popular" class="sidebar__link">Popular</a></li>
+            <li><a href="#trending" class="sidebar__link">Trending</a></li>
+            <li><a href="#categories" class="sidebar__link">Categories</a></li>
+        </ul>
+        </nav>
+      </aside>
+    </div>
+  </header>
   <main>
     <section class="slider grid gap-1">
       <div class="slider__container">
@@ -27,7 +46,12 @@
           <img src="./images/image-product-4.jpg" alt="Shoes" class="slide slide4">
         </div>
       </div>
-      <div class="slider__thumbnails gap-1"></div>
+      <div class="slider__thumbnails gap-1">
+        <img src="./images/image-product-1-thumbnail.jpg" alt="Shoes" class="thumbnail rounded">
+        <img src="./images/image-product-2-thumbnail.jpg" alt="Shoes" class="thumbnail rounded">
+        <img src="./images/image-product-3-thumbnail.jpg" alt="Shoes" class="thumbnail rounded">
+        <img src="./images/image-product-4-thumbnail.jpg" alt="Shoes" class="thumbnail rounded">
+      </div>
     </section>
     <section class="product">
       <div class="product__content grid gap-4">

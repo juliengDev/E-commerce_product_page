@@ -1,5 +1,3 @@
-
-
 * {
   margin: 0;
   padding: 0;
@@ -11,13 +9,24 @@
   box-sizing: inherit;
 }
 body {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   min-height: 100dvh;
   height : 100%;
   width: 100%;
+  &::after {
+    content: '';
+    position: fixed;
+    inset: 0; /* Équivalent à top: 0; right: 0; bottom: 0; left: 0; */
+    background-color: #000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--animation-timing), visibility var(--animation-timing);
+    z-index: 999; /* Juste en dessous de votre navigation qui est à 1000 */
+    pointer-events: none; /* Permet de cliquer à travers quand invisible */
+  }
 }
 html {
   box-sizing: border-box;
@@ -35,6 +44,9 @@ a:active {
 
 svg {
   pointer-events: none;
+}
+li {
+  list-style: none;
 }
 
 /*

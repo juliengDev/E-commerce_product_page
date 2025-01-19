@@ -29,13 +29,24 @@ ORDER: Base + typography > general layout + grid > page layout > components
 }
 
 body {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   min-height: 100dvh;
   height: 100%;
   width: 100%;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0; /* Équivalent à top: 0; right: 0; bottom: 0; left: 0; */
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--animation-timing), visibility var(--animation-timing);
+  z-index: 999; /* Juste en dessous de votre navigation qui est à 1000 */
+  pointer-events: none; /* Permet de cliquer à travers quand invisible */
 }
 
 html {
@@ -54,6 +65,10 @@ a:active {
 
 svg {
   pointer-events: none;
+}
+
+li {
+  list-style: none;
 }
 
 /*
@@ -354,6 +369,138 @@ button {
   border: 0;
 }
 
+:root {
+  --foreground: #FFFDFA;
+  --background: #00001A;
+  --bar-width:40px;
+  --bar-height:4px;
+  --hamburger-gap: 6px;
+  --hamburger-margin: 27px;
+  --animation-timing: 200ms ease-in-out;
+  --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
+}
+
+header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navigation-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  z-index: 1000;
+}
+@media only screen and (min-width: 56.25em) {
+  .navigation-wrapper {
+    display: none;
+  }
+}
+
+.hamburger-menu {
+  --x-width: calc(var(--hamburger-height) * 1.41421356237);
+  display: flex;
+  flex-direction: column;
+  gap: var(--hamburger-gap);
+  width: max-content;
+  position: relative;
+  padding: var(--hamburger-margin);
+  z-index: 1001;
+  cursor: pointer;
+}
+
+.hamburger-menu:has(input:focus-visible)::before,
+.hamburger-menu:has(input:focus-visible)::after,
+.hamburger-menu input:focus-visible {
+  border: 1px solid var(--background);
+  box-shadow: 0 0 0 1px var(--foreground);
+}
+
+.hamburger-menu::before, .hamburger-menu input, .hamburger-menu::after {
+  content: "";
+  width: var(--bar-width);
+  height: var(--bar-height);
+  background-color: var(--background);
+  transform-origin: left center;
+  transition: opacity var(--animation-timing), width var(--animation-timing), rotate var(--animation-timing), translate var(--animation-timing), background-color var(--animation-timing);
+}
+
+.hamburger-menu input {
+  appearance: none;
+  outline: none;
+  pointer-events: none;
+}
+
+.hamburger-menu:has(input:checked)::before {
+  rotate: 45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / -2);
+}
+
+.hamburger-menu:has(input:checked)::after {
+  rotate: -45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / 2);
+}
+
+.hamburger-menu input:checked {
+  opacity: 0;
+  width: 0;
+}
+
+.sidebar {
+  width: 100%;
+  max-width: 25rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  transition: translate var(--animation-timing);
+  translate: -100%;
+  padding: 0.5rem 1rem;
+  padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem);
+  background-color: var(--foreground);
+  color: var(--background);
+  opacity: 0;
+}
+.sidebar__nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding: 5.3rem 2.4rem;
+  font-size: 1.8rem;
+  line-height: 24px;
+}
+.sidebar__link {
+  color: var(--background);
+  list-style: none;
+  text-decoration: none;
+  transition: color var(--animation-timing);
+  cursor: pointer;
+}
+.sidebar__link:hover {
+  color: var(--yellow);
+}
+
+.hamburger-menu:has(input:checked) + .sidebar {
+  translate: 0;
+  opacity: 1;
+}
+
+.hamburger-menu:has(input:checked) ~ .container {
+  padding-left: calc(10rem + var(--hamburger-margin));
+}
+
+.hamburger-menu:has(input:checked) ~ body::after,
+body:has(.hamburger-menu input:checked)::after {
+  opacity: 0.75;
+  visibility: visible;
+  pointer-events: all; /* Réactive les clics quand visible */
+}
+
 .attribution {
   margin: 1.6rem 0 6rem;
   font-size: 1.1rem;
@@ -374,6 +521,11 @@ main {
 
 .slider {
   max-width: 44.5rem;
+}
+@media only screen and (min-width: 37.5em) {
+  .slider {
+    gap: 3.2rem;
+  }
 }
 .slider__container {
   overflow: hidden;
@@ -410,6 +562,16 @@ main {
   min-width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.slider__thumbnails {
+  display: none;
+  gap: 3.1rem;
+}
+@media only screen and (min-width: 37.5em) {
+  .slider__thumbnails {
+    display: flex;
+    align-items: start;
+  }
 }
 
 .product {
