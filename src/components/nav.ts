@@ -11,3 +11,4 @@ if (menuToggle && mobileNav) {
     mobileNav.setAttribute('aria-hidden', String(!isExpanded));
   });
 }
+

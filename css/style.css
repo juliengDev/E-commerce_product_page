@@ -29,13 +29,14 @@ ORDER: Base + typography > general layout + grid > page layout > components
 }
 
 body {
+  width: 100%;
+  max-width: 111rem;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin: 0 auto;
   min-height: 100dvh;
   height: 100%;
-  width: 100%;
 }
 body::after {
   content: "";
@@ -131,7 +132,7 @@ body {
   --text-opacity: hsl(25, 100%, 3%, 0.75);
   --alt-bkg: hsl(220, 13%, 13%);
   --alt-bkg1: hsl(219, 9%, 45%);
-  --alt-bkg2: hsl(220, 14%, 75%);
+  --alt-bkg2: hsl(343, 14%, 75%);
   --alt-bkg3: hsl(223, 64%, 98%);
   /* MISC */
   --radius: 0.6rem;
@@ -371,10 +372,10 @@ button {
 
 :root {
   --foreground: #FFFDFA;
-  --background: #00001A;
-  --bar-width:40px;
-  --bar-height:4px;
-  --hamburger-gap: 6px;
+  --background: #979797;
+  --bar-width:16px;
+  --bar-height:3px;
+  --hamburger-gap: 3px;
   --hamburger-margin: 27px;
   --animation-timing: 200ms ease-in-out;
   --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
@@ -386,7 +387,6 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  z-index: 1000;
 }
 
 .navigation-wrapper {
@@ -407,7 +407,6 @@ header {
   gap: var(--hamburger-gap);
   width: max-content;
   position: relative;
-  padding: var(--hamburger-margin);
   z-index: 1001;
   cursor: pointer;
 }
@@ -460,7 +459,7 @@ header {
   height: 100vh;
   transition: translate var(--animation-timing);
   translate: -100%;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
   padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem);
   background-color: var(--foreground);
   color: var(--background);
@@ -469,10 +468,12 @@ header {
 .sidebar__nav ul {
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 2rem;
   padding: 5.3rem 2.4rem;
   font-size: 1.8rem;
+  font-weight: bold;
   line-height: 24px;
+  color: var(--text);
 }
 .sidebar__link {
   color: var(--background);
@@ -515,8 +516,90 @@ body:has(.hamburger-menu input:checked)::after {
   cursor: pointer;
 }
 
-main {
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.9rem 2.4rem;
+}
+.header__grp {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+.header__grp .header__title {
+  cursor: pointer;
+}
+.header__cart__grp {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+.header__cart__avatar {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+}
+
+.cart-container {
   max-width: 111rem;
+  margin: 0 auto;
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  padding: calc(var(--sizer-1) * 0.5);
+  display: flex;
+  justify-content: end;
+  align-items: start;
+}
+.cart-container[disabled] {
+  transform: translateY(-100%);
+}
+.cart-container .cart {
+  background-color: var(--bkg);
+  position: relative;
+  top: calc(var(--sizer-7) + var(--sizer-5));
+  box-shadow: 0px 10px 25px hsla(25, 100%, 3%, 0.25);
+  width: 100%;
+  border-radius: 10px;
+  max-width: 356px;
+}
+@media only screen and (min-width: 56.25em) {
+  .cart-container .cart {
+    left: 46px;
+  }
+}
+.cart-container .cart__header {
+  padding: var(--sizer-1);
+  border-bottom: 1px solid var(--alt-bkg2);
+}
+.cart-container .cart__body {
+  padding: var(--sizer-1);
+  place-items: center;
+}
+.cart-container .cart__body--content {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.cart-container .cart__body--content-description {
+  align-items: center;
+}
+.cart-container .cart__img {
+  width: calc(var(--sizer-5) * 1.2);
+  height: calc(var(--sizer-5) * 1.2);
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+main {
+  margin: 0 auto;
+}
+@media only screen and (min-width: 56.25em) {
+  main {
+    display: flex;
+    gap: 12.5rem;
+  }
 }
 
 .slider {
@@ -530,6 +613,7 @@ main {
 .slider__container {
   overflow: hidden;
   position: relative;
+  max-width: 44.5rem;
   width: 100%;
 }
 .slider__container__btn {
@@ -567,16 +651,29 @@ main {
   display: none;
   gap: 3.1rem;
 }
+.slider__thumbnails img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  width: 88px;
+}
 @media only screen and (min-width: 37.5em) {
   .slider__thumbnails {
     display: flex;
     align-items: start;
+    max-width: 44.5rem;
   }
 }
 
 .product {
   padding: var(--sizer-4);
   margin-bottom: 8.8rem;
+  max-width: 44.5rem;
+}
+@media only screen and (min-width: 56.25em) {
+  .product {
+    padding: 6.2rem 0;
+  }
 }
 .product__price {
   justify-content: space-between;

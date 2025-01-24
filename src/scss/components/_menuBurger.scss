@@ -1,9 +1,9 @@
 :root {
   --foreground: #FFFDFA; 
-  --background: #00001A;
-  --bar-width:40px;
-  --bar-height:4px;
-  --hamburger-gap: 6px;
+  --background: #979797;
+  --bar-width:16px;
+  --bar-height:3px;
+  --hamburger-gap: 3px;
   --hamburger-margin: 27px;
   --animation-timing: 200ms ease-in-out;
   --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2); 
@@ -15,7 +15,6 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  z-index: 1000;
 }
 .navigation-wrapper {
   display: flex;
@@ -36,7 +35,6 @@ header {
   gap: var(--hamburger-gap);
   width: max-content;  
   position: relative;
-  padding: var(--hamburger-margin);
   z-index: 1001;  
   cursor: pointer;
  
@@ -99,7 +97,7 @@ header {
   height:  100vh;
   transition: translate var(--animation-timing);
   translate: -100%;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
   padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem);
   background-color: var(--foreground);
   color: var(--background);
@@ -107,10 +105,12 @@ header {
   &__nav ul {
     display: flex;
     flex-direction: column;
-    gap: 2.4rem;
+    gap: 2rem;
     padding: 5.3rem 2.4rem;
     font-size:1.8rem;
+    font-weight: bold;
     line-height: 24px;
+    color: var(--text);
   }
   &__link {
     color: var(--background);

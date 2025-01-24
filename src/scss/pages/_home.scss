@@ -1,8 +1,98 @@
-main {
-  max-width: 111rem;
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.9rem 2.4rem;
 
+  
+  &__grp {
+    display: flex;
+    align-items: center;
+    gap:1.6rem;  
+    
+    & .header__title {
+      cursor: pointer;
+    }
+  }
+
+  &__cart__grp {
+      display: flex;
+      align-items: center; 
+      gap:2.2rem; 
+      
+    
+  }
+  &__cart__avatar {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    
+  }
 }
 
+// cart section 
+
+.cart-container {
+  max-width: 111rem;
+  margin: 0 auto;
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  padding: calc(var(--sizer-1) * 0.5);
+  display: flex;
+  justify-content: end;
+  align-items: start;
+    
+    &[disabled] {
+      transform: translateY(-100%);
+    }
+    & .cart {
+      background-color: var(--bkg);
+      position: relative;      
+      top: calc(var(--sizer-7) + var(--sizer-5));      
+      box-shadow: 0px 10px 25px hsl(25, 100%, 3%, 0.25);
+      width: 100%;
+      border-radius: 10px;
+      max-width: 356px;
+      
+      @include respond(tab-port) {
+        left: 46px;
+      }
+
+      &__header {
+        padding: var(--sizer-1);
+        border-bottom: 1px solid var(--alt-bkg2);
+      }
+      &__body {
+        padding: var(--sizer-1);
+        place-items: center;
+        &--content {        
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            &-description { 
+              align-items: center;              
+            }
+        }
+      }
+      &__img {
+        width: calc(var(--sizer-5) * 1.2);
+        height: calc(var(--sizer-5) * 1.2);
+        object-fit: cover;
+        border-radius: 5px;
+      }
+    }
+}
+
+// main 
+
+main {
+  margin: 0 auto;
+  @include respond(tab-port) {
+    display: flex;
+    gap: 12.5rem;
+  }
+ }
 // slider section
 
 .slider {
@@ -14,6 +104,7 @@ main {
   &__container {
     overflow: hidden;
     position: relative;
+    max-width: 44.5rem;
     width: 100%;
     &__btn {
       position: absolute;
@@ -53,9 +144,17 @@ main {
   &__thumbnails {
     display: none;
     gap:3.1rem;
+    & img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+      width: 88px;
+    }
+    
     @include respond(phone) {
       display: flex;
       align-items: start;
+      max-width: 44.5rem;
     }
   }
 }
@@ -64,6 +163,11 @@ main {
 .product {
   padding: var(--sizer-4);
   margin-bottom: 8.8rem;
+  max-width: 44.5rem;
+
+  @include respond(tab-port) {
+    padding: 6.2rem 0;
+  }
   &__price  {
     justify-content: space-between;
     align-items: center;    
