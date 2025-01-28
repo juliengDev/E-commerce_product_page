@@ -4,8 +4,6 @@ const amtBtns = document.querySelectorAll<HTMLButtonElement>('.amt');
 const qtyEl = document.getElementById('qty') as HTMLSpanElement | null;
 const cartPanelEl = document.querySelector('#cartPanel') as HTMLDivElement | null;
 const cartBtnEl = document.getElementById('cartBtn') as HTMLButtonElement | null;
-// const btnDecEl = document.getElementById('amt--decrease') as HTMLButtonElement | null;
-// const btnIncEl = document.getElementById('amt--increase') as HTMLButtonElement | null;
 const cartBody = document.querySelector('#cart__body') as HTMLDivElement | null;
 const checkoutBtnEl = document.getElementById('checkout') as HTMLButtonElement | null;
 const cartIndicator = document.querySelector('#cartIndicator') as HTMLSpanElement | null;
@@ -46,6 +44,15 @@ const checkoutState = {
       </div>`
 }
 
+function initializeCart() {
+  if (cartIndicator) {
+    cartIndicator.textContent = null;
+    cartIndicator.classList.remove('active');
+  }
+  if (cartBody) {
+    cartBody.innerHTML = checkoutState.default;
+  }
+}
 
 const toggleCart = () => {
   if (!cartBtnEl || !cartPanelEl) return;
@@ -157,7 +164,7 @@ if(cartPanelEl) {
 }
 
 
-
+document.addEventListener('DOMContentLoaded', initializeCart);
 
 
 

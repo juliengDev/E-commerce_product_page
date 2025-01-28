@@ -504,7 +504,7 @@ body:has(.hamburger-menu input:checked)::after {
 }
 
 .attribution {
-  margin: 1.6rem 0 6rem;
+  margin: 14.6rem 0 6rem;
   font-size: 1.1rem;
   text-align: center;
   color: var(--color-dark-charcoal);
@@ -540,6 +540,9 @@ body:has(.hamburger-menu input:checked)::after {
   display: flex;
   align-items: center;
   gap: 2.2rem;
+}
+.header__cart__grp > a {
+  cursor: pointer;
 }
 .header__cart__avatar {
   width: 2.4rem;
@@ -590,6 +593,9 @@ body:has(.hamburger-menu input:checked)::after {
 }
 .cart-container .cart__body--content-description {
   align-items: center;
+}
+.cart-container .cart__body--content > button {
+  cursor: pointer;
 }
 .cart-container .cart__body--btn {
   padding: var(--sizer-1);
@@ -672,10 +678,12 @@ main {
   transition: transform 0.3s ease-in-out;
 }
 .slider__container .sliderEl .slide {
+  display: flex;
   flex: 1;
   min-width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: pointer;
 }
 .slider__thumbnails {
   display: none;
@@ -693,6 +701,102 @@ main {
     align-items: start;
     max-width: 44.5rem;
   }
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.lightbox.hidden {
+  display: none;
+}
+
+.lightbox__slider {
+  max-width: 550px;
+  position: relative;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: -4rem;
+  right: 0rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #69707D;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.lightbox__close svg path {
+  fill: #fff;
+}
+
+.lightbox__close:hover svg path {
+  fill: var(--accent);
+}
+
+.lightbox__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lightbox__btn--left {
+  left: -20px;
+}
+
+.lightbox__btn--right {
+  right: -20px;
+}
+
+.lightbox__container {
+  margin-bottom: 32px;
+}
+
+.lightbox__slide {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.lightbox__thumbnails {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.lightbox__thumbnail {
+  width: 88px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.lightbox__thumbnail:hover {
+  opacity: 0.6;
+}
+
+.lightbox__thumbnail.active {
+  border: 2px solid #ff7d1a;
+  opacity: 0.6;
 }
 
 .product {
@@ -740,6 +844,7 @@ main {
   padding: 1.9rem;
   box-shadow: 0px 10px 25px var(--accent-semi-transparent);
   z-index: 6;
+  cursor: pointer;
 }
 
 .amt {
@@ -754,11 +859,10 @@ main {
   cursor: not-allowed;
 }
 
-/* TOAST CSS */
 .toast-container {
-  position: fixed;
+  position: absolute;
   top: calc(var(--sizer-5) + var(--sizer-3));
-  right: var(--sizer-1);
+  right: 0;
   z-index: 8;
   display: grid;
   gap: var(--sizer-1);
