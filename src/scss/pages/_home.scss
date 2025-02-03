@@ -466,3 +466,9 @@ main {
     flex: 1 1 100%;
   }
 }
+
+.lightbox {
+  @media (max-width: 900px) {
+    display: none !important;
+  }
+}

@@ -15,6 +15,7 @@ class AccessibleLightboxSlider {
   private currentIndex: number;
   private readonly images: string[];
   private previousFocus: HTMLElement | null;
+  private readonly DESKTOP_BREAKPOINT = 900;
 
   constructor() {
     this.currentIndex = 0;
@@ -28,6 +29,11 @@ class AccessibleLightboxSlider {
 
     this.elements = this.initializeElements();
     this.initializeEventListeners();
+    window.addEventListener('resize', this.handleResize.bind(this));
+  }
+
+  private isDesktop(): boolean {
+    return window.innerWidth >= this.DESKTOP_BREAKPOINT;
   }
 
   private initializeElements(): SliderElements {
@@ -63,57 +69,81 @@ class AccessibleLightboxSlider {
   private initializeEventListeners(): void {
     this.elements.mainSlider.querySelectorAll('.slide').forEach((slide: Element, index: number) => {
       if (slide instanceof HTMLElement) {
-        slide.setAttribute('role', 'button');
-        slide.setAttribute('aria-label', `View image ${index + 1} of ${this.images.length}`);
-        slide.setAttribute('tabindex', '0');
-        
-        slide.addEventListener('click', () => this.openLightbox(index));
-        slide.addEventListener('keydown', (e: KeyboardEvent) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.openLightbox(index);
-          }
-        });
+        if (this.isDesktop()) {
+          // Configuration desktop avec lightbox
+          slide.setAttribute('role', 'button');
+          slide.setAttribute('aria-label', `View image ${index + 1} of ${this.images.length}`);
+          slide.setAttribute('tabindex', '0');
+          
+          slide.addEventListener('click', () => this.openLightbox(index));
+          slide.addEventListener('keydown', (e: KeyboardEvent) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              this.openLightbox(index);
+            }
+          });
+        } else {
+          // Configuration mobile sans lightbox
+          slide.removeAttribute('role');
+          slide.removeAttribute('aria-label');
+          slide.setAttribute('tabindex', '-1');
+        }
       }
     });
 
-    this.elements.lightbox.addEventListener('keydown', (e: KeyboardEvent) => {
-      switch (e.key) {
-        case 'Escape':
-          this.closeLightbox();
-          break;
-        case 'ArrowLeft':
-          this.navigateImages('prev');
-          break;
-        case 'ArrowRight':
-          this.navigateImages('next');
-          break;
-        case 'Tab':
-          this.manageFocusTrap(e);
-          break;
-      }
-    });
-
-    this.elements.lightboxPrev.addEventListener('click', () => this.navigateImages('prev'));
-    this.elements.lightboxNext.addEventListener('click', () => this.navigateImages('next'));
-    this.elements.closeLightbox.addEventListener('click', () => this.closeLightbox());
-
-    this.elements.lightboxThumbnails.forEach((thumbnail: HTMLImageElement, index: number) => {
-      thumbnail.setAttribute('role', 'button');
-      thumbnail.setAttribute('aria-label', `Select image ${index + 1}`);
-      thumbnail.setAttribute('tabindex', '0');
-      
-      thumbnail.addEventListener('click', () => this.selectImage(index));
-      thumbnail.addEventListener('keydown', (e: KeyboardEvent) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.selectImage(index);
+    if (this.isDesktop()) {
+      this.elements.lightbox.addEventListener('keydown', (e: KeyboardEvent) => {
+        switch (e.key) {
+          case 'Escape':
+            this.closeLightbox();
+            break;
+          case 'ArrowLeft':
+            this.navigateImages('prev');
+            break;
+          case 'ArrowRight':
+            this.navigateImages('next');
+            break;
+          case 'Tab':
+            this.manageFocusTrap(e);
+            break;
         }
       });
-    });
+
+      this.elements.lightboxPrev.addEventListener('click', () => this.navigateImages('prev'));
+      this.elements.lightboxNext.addEventListener('click', () => this.navigateImages('next'));
+      this.elements.closeLightbox.addEventListener('click', () => this.closeLightbox());
+
+      this.elements.lightboxThumbnails.forEach((thumbnail: HTMLImageElement, index: number) => {
+        thumbnail.setAttribute('role', 'button');
+        thumbnail.setAttribute('aria-label', `Select image ${index + 1}`);
+        thumbnail.setAttribute('tabindex', '0');
+        
+        thumbnail.addEventListener('click', () => this.selectImage(index));
+        thumbnail.addEventListener('keydown', (e: KeyboardEvent) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.selectImage(index);
+          }
+        });
+      });
+    }
+  }
+
+  private handleResize(): void {
+    // Si on passe en mobile et que la lightbox est ouverte, la fermer
+    if (!this.isDesktop() && !this.elements.lightbox.classList.contains('hidden')) {
+      this.closeLightbox();
+    }
+    
+    // Mettre à jour les event listeners
+    this.initializeEventListeners();
   }
 
   private openLightbox(index: number): void {
+    if (!this.isDesktop()) {
+      return; // Ne fait rien si ce n'est pas en version desktop
+    }
+    
     this.previousFocus = document.activeElement as HTMLElement;
     this.currentIndex = index;
     this.elements.lightbox.classList.remove('hidden');
@@ -154,7 +184,6 @@ class AccessibleLightboxSlider {
     this.elements.lightboxSlide.src = this.images[this.currentIndex];
     this.elements.lightboxSlide.alt = `Image ${this.currentIndex + 1} of ${this.images.length}`;
     
-    // Mettre à jour les thumbnails
     this.elements.lightboxThumbnails.forEach((thumb: HTMLImageElement, index: number) => {
       const isActive = index === this.currentIndex;
       thumb.classList.toggle('active', isActive);
@@ -162,7 +191,6 @@ class AccessibleLightboxSlider {
     });
 
     this.updateNavigationButtons();
-
     this.updateAriaStatus(`Image ${this.currentIndex + 1} of ${this.images.length}`);
   }
 
@@ -198,6 +226,10 @@ class AccessibleLightboxSlider {
 
   private updateAriaStatus(message: string): void {
     this.elements.lightboxStatus.textContent = message;
+  }
+
+  public destroy(): void {
+    window.removeEventListener('resize', this.handleResize.bind(this));
   }
 }
 

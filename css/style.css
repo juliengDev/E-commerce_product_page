@@ -981,5 +981,10 @@ main {
     flex: 1 1 100%;
   }
 }
+@media (max-width: 900px) {
+  .lightbox {
+    display: none !important;
+  }
+}
 
 /*# sourceMappingURL=style.css.map */
