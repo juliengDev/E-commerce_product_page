@@ -20,10 +20,10 @@ class AccessibleLightboxSlider {
     this.currentIndex = 0;
     this.previousFocus = null;
     this.images = [
-      './images/image-product-1.jpg',
-      './images/image-product-2.jpg',
-      './images/image-product-3.jpg',
-      './images/image-product-4.jpg'
+      './assets/image-product-1.jpg',
+      './assets/image-product-2.jpg',
+      './assets/image-product-3.jpg',
+      './assets/image-product-4.jpg'
     ];
 
     this.elements = this.initializeElements();
