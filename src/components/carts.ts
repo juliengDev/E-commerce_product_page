@@ -60,12 +60,10 @@ const toggleCart = () => {
   const isCurrentlyHidden = cartPanelEl.classList.contains('hidden');
 
   if (isCurrentlyHidden) {
-    // Show cart
     cartPanelEl.classList.remove('hidden');
     cartBtnEl.setAttribute('aria-expanded', 'true');
     cartPanelEl.setAttribute('aria-hidden', 'false');
   } else {
-    // Hide cart
     cartPanelEl.classList.add('hidden');
     cartBtnEl.setAttribute('aria-expanded', 'false');
     cartPanelEl.setAttribute('aria-hidden', 'true');
@@ -135,7 +133,6 @@ function handleAmtBtnClick(e: Event){
 
 
 
-// Event listeners
 amtBtns.forEach(b => b.addEventListener('click', handleAmtBtnClick));
 
 if (cartBtnEl) {

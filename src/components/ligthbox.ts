@@ -31,19 +31,16 @@ class AccessibleLightboxSlider {
   }
 
   private initializeElements(): SliderElements {
-    // Initialisation des éléments avec vérification d'existence
     const mainSlider = document.querySelector('.slider') as HTMLElement;
     if (!mainSlider) throw new Error('Main slider element not found');
 
     const lightbox = document.querySelector('.lightbox') as HTMLElement;
     if (!lightbox) throw new Error('Lightbox element not found');
 
-    // Ajout d'attributs ARIA pour le dialogue
     lightbox.setAttribute('role', 'dialog');
     lightbox.setAttribute('aria-modal', 'true');
     lightbox.setAttribute('aria-label', 'Image lightbox');
 
-    // Création d'un élément pour les annonces live
     const statusElement = document.createElement('div');
     statusElement.className = 'sr-only';
     statusElement.setAttribute('role', 'status');
@@ -64,7 +61,6 @@ class AccessibleLightboxSlider {
   }
 
   private initializeEventListeners(): void {
-    // Ajouter des gestionnaires d'événements accessibles pour le slider principal
     this.elements.mainSlider.querySelectorAll('.slide').forEach((slide: Element, index: number) => {
       if (slide instanceof HTMLElement) {
         slide.setAttribute('role', 'button');
@@ -81,7 +77,6 @@ class AccessibleLightboxSlider {
       }
     });
 
-    // Navigation au clavier dans la lightbox
     this.elements.lightbox.addEventListener('keydown', (e: KeyboardEvent) => {
       switch (e.key) {
         case 'Escape':
@@ -99,12 +94,10 @@ class AccessibleLightboxSlider {
       }
     });
 
-    // Boutons de navigation
     this.elements.lightboxPrev.addEventListener('click', () => this.navigateImages('prev'));
     this.elements.lightboxNext.addEventListener('click', () => this.navigateImages('next'));
     this.elements.closeLightbox.addEventListener('click', () => this.closeLightbox());
 
-    // Gestion des thumbnails
     this.elements.lightboxThumbnails.forEach((thumbnail: HTMLImageElement, index: number) => {
       thumbnail.setAttribute('role', 'button');
       thumbnail.setAttribute('aria-label', `Select image ${index + 1}`);
@@ -126,19 +119,16 @@ class AccessibleLightboxSlider {
     this.elements.lightbox.classList.remove('hidden');
     this.updateLightboxImage();
     
-    // Focus sur le premier élément focusable
     setTimeout(() => {
       this.elements.closeLightbox.focus();
     }, 100);
 
-    // Annoncer l'ouverture aux lecteurs d'écran
     this.updateAriaStatus(`Lightbox opened, displaying image ${index + 1} of ${this.images.length}`);
   }
 
   private closeLightbox(): void {
     this.elements.lightbox.classList.add('hidden');
     
-    // Restaurer le focus
     if (this.previousFocus) {
       this.previousFocus.focus();
     }
@@ -161,7 +151,6 @@ class AccessibleLightboxSlider {
   }
 
   private updateLightboxImage(): void {
-    // Mettre à jour l'image
     this.elements.lightboxSlide.src = this.images[this.currentIndex];
     this.elements.lightboxSlide.alt = `Image ${this.currentIndex + 1} of ${this.images.length}`;
     
@@ -172,20 +161,16 @@ class AccessibleLightboxSlider {
       thumb.setAttribute('aria-pressed', isActive.toString());
     });
 
-    // Mise à jour des états des boutons
     this.updateNavigationButtons();
 
-    // Annoncer le changement d'image aux lecteurs d'écran
     this.updateAriaStatus(`Image ${this.currentIndex + 1} of ${this.images.length}`);
   }
 
   private updateNavigationButtons(): void {
-    // Mise à jour du bouton précédent
     this.elements.lightboxPrev.classList.toggle('hidden', this.currentIndex === 0);
     this.elements.lightboxPrev.setAttribute('aria-hidden', (this.currentIndex === 0).toString());
     this.elements.lightboxPrev.disabled = this.currentIndex === 0;
 
-    // Mise à jour du bouton suivant
     this.elements.lightboxNext.classList.toggle('hidden', this.currentIndex === this.images.length - 1);
     this.elements.lightboxNext.setAttribute('aria-hidden', (this.currentIndex === this.images.length - 1).toString());
     this.elements.lightboxNext.disabled = this.currentIndex === this.images.length - 1;
@@ -216,7 +201,6 @@ class AccessibleLightboxSlider {
   }
 }
 
-// Initialisation
 document.addEventListener('DOMContentLoaded', () => {
   new AccessibleLightboxSlider();
 });

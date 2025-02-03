@@ -1,8 +1,15 @@
 .header {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  padding: 1.9rem 2.4rem;
+  justify-content: space-between;  
+  padding: 1.9rem 2.4rem; 
+  
+  
+  @include respond(tab-port) {
+    padding: 1.9rem 0;
+    margin-bottom: 4.9rem; 
+    border-bottom: 1px solid var(--alt-bkg2); 
+  }
 
   
   &__grp {
@@ -132,9 +139,11 @@
 
 
 main {
-  margin: 0 auto;
+  align-items: center;
   @include respond(tab-port) {
     display: flex;
+    margin: 0 4.8rem;
+    justify-content: space-between;
     gap: 12.5rem;
   }
  }
@@ -196,6 +205,7 @@ main {
       height: auto;
       object-fit: cover;
       width: 88px;
+      cursor: pointer;
     }
     
     @include respond(phone) {
@@ -313,7 +323,24 @@ main {
   @include respond(tab-port) {
     padding: 6.2rem 0;
   }
+  &__description {
+
+    & > h1 {
+      @include respond(tab-port) {
+        font-size: 4.4rem;
+        line-height: 48px;
+        margin-bottom: 0.8rem;
+      }
+    }
+  }
+  
   &__price  {
+    @include respond(tab-port) { 
+      flex-direction: column;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
     justify-content: space-between;
     align-items: center;    
     &__discount {
@@ -327,6 +354,9 @@ main {
     }
   }
   &__checkout {
+    @include respond(tab-port) { 
+      flex-wrap: nowrap;
+     }
     flex-wrap: wrap;
     &__amt {
       flex: 100%;

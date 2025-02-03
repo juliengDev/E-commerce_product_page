@@ -41,13 +41,13 @@ body {
 body::after {
   content: "";
   position: fixed;
-  inset: 0; /* Équivalent à top: 0; right: 0; bottom: 0; left: 0; */
+  inset: 0;
   background-color: #000;
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--animation-timing), visibility var(--animation-timing);
-  z-index: 999; /* Juste en dessous de votre navigation qui est à 1000 */
-  pointer-events: none; /* Permet de cliquer à travers quand invisible */
+  z-index: 999;
+  pointer-events: none;
 }
 
 html {
@@ -62,7 +62,7 @@ a:hover,
 a:active {
   text-decoration: none;
   color: inherit;
-  cursor: auto; /* or pointer if you want to keep the default hand cursor */
+  cursor: auto;
 }
 
 svg {
@@ -476,15 +476,46 @@ header {
   line-height: 24px;
   color: var(--text);
 }
+.sidebar__nav--desktop {
+  max-width: 40rem;
+}
+.sidebar__nav--desktop ul {
+  display: none;
+  gap: 3.2rem;
+  padding-left: 4.5rem;
+}
+@media only screen and (min-width: 56.25em) {
+  .sidebar__nav--desktop ul {
+    display: flex;
+    align-items: center;
+  }
+}
+.sidebar__nav--desktop ul li:hover {
+  position: relative;
+}
+.sidebar__nav--desktop ul li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -24px;
+  width: 0;
+  height: 4px;
+  background-color: var(--accent);
+}
+.sidebar__nav--desktop ul li:hover::after {
+  width: 100%;
+}
+.sidebar__nav--desktop ul li a {
+  color: var(--alt-bkg1);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 .sidebar__link {
   color: var(--background);
   list-style: none;
   text-decoration: none;
   transition: color var(--animation-timing);
   cursor: pointer;
-}
-.sidebar__link:hover {
-  color: var(--yellow);
 }
 
 .hamburger-menu:has(input:checked) + .sidebar {
@@ -500,18 +531,18 @@ header {
 body:has(.hamburger-menu input:checked)::after {
   opacity: 0.75;
   visibility: visible;
-  pointer-events: all; /* Réactive les clics quand visible */
+  pointer-events: all;
 }
 
 .attribution {
   margin: 14.6rem 0 6rem;
   font-size: 1.1rem;
   text-align: center;
-  color: var(--color-dark-charcoal);
+  color: var(--text);
 }
 .attribution__credit {
   font-weight: 800;
-  color: var(--color-dark-raspberry) !important;
+  color: var(--accent) !important;
 }
 .attribution a {
   cursor: pointer;
@@ -522,6 +553,13 @@ body:has(.hamburger-menu input:checked)::after {
   display: flex;
   justify-content: space-between;
   padding: 1.9rem 2.4rem;
+}
+@media only screen and (min-width: 56.25em) {
+  .header {
+    padding: 1.9rem 0;
+    margin-bottom: 4.9rem;
+    border-bottom: 1px solid var(--alt-bkg2);
+  }
 }
 .header__grp {
   display: flex;
@@ -629,11 +667,13 @@ body:has(.hamburger-menu input:checked)::after {
 }
 
 main {
-  margin: 0 auto;
+  align-items: center;
 }
 @media only screen and (min-width: 56.25em) {
   main {
     display: flex;
+    margin: 0 4.8rem;
+    justify-content: space-between;
     gap: 12.5rem;
   }
 }
@@ -694,6 +734,7 @@ main {
   height: auto;
   object-fit: cover;
   width: 88px;
+  cursor: pointer;
 }
 @media only screen and (min-width: 37.5em) {
   .slider__thumbnails {
@@ -809,9 +850,24 @@ main {
     padding: 6.2rem 0;
   }
 }
+@media only screen and (min-width: 56.25em) {
+  .product__description > h1 {
+    font-size: 4.4rem;
+    line-height: 48px;
+    margin-bottom: 0.8rem;
+  }
+}
 .product__price {
   justify-content: space-between;
   align-items: center;
+}
+@media only screen and (min-width: 56.25em) {
+  .product__price {
+    flex-direction: column;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
 }
 .product__price__discount {
   display: flex;
@@ -824,6 +880,11 @@ main {
 }
 .product__checkout {
   flex-wrap: wrap;
+}
+@media only screen and (min-width: 56.25em) {
+  .product__checkout {
+    flex-wrap: nowrap;
+  }
 }
 .product__checkout__amt {
   flex: 100%;
